@@ -1,0 +1,28 @@
+name:Deploy Node Application
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+      - name: Login to docker hub
+        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+      - name: Build Docker Image
+        run: docker build -t soumyaranjan817/aws-test-nodejsapp  .
+      - name: Publish Image to docker hub
+        run: docker push soumyaranjan817/aws-test-nodejsapp:latest
+
+  deploys:
+    needs: build
+    runs-on: self-hoisted
+    steps:
+      - name: Pull image from docker hub
+        run: docker pull soumyaranjan817/aws-test-nodejsapp:latest
+      - name: Run Docker Container
+        run: docker run -d -p 7777:7777 --name nodejs-app-container -e MONGO_USER='${{secrets.MONGO_USER}}' -e MONGO_PASSWORD='${{secrets.MONGO_PASSWORD}}' soumyaranjan817/aws-test-nodejsapp
