@@ -5,7 +5,7 @@ const adminAuth =(req,res,next)=>{
     if(!isAdminAuthorized){
       res.status(401).send("Admin not authorize")
     }
-    
+
     next()
   }
 
