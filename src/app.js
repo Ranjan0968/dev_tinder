@@ -1,6 +1,7 @@
 const express = require('express');
 const connectionDB = require('./config/database');
 const User = require("./models/userSchema")
+require('dotenv').config();
 
 const app = express();
 
@@ -65,8 +66,8 @@ app.patch("/user",async(req,res)=>{
 connectionDB().then(
   ()=>{
       console.log("Database connected Succesfully")
-      app.listen('7777',()=>{
-        console.log("Server is running successfully on port 7777")
+      app.listen(process.env.PORT,()=>{
+        console.log(`Server is running successfully on port ${process.env.PORT}`)
     })
   }
 ).catch(
@@ -77,6 +78,3 @@ connectionDB().then(
 
 
 
-// app.listen('7777',()=>{
-//     console.log("Server is running successfully on port 7777")
-// })
