@@ -20,7 +20,7 @@ jobs:
 
   deploys:
     needs: build
-    runs-on: self-hoisted
+    runs-on: self-hosted
     steps:
       - name: Pull image from docker hub
         run: docker pull soumyaranjan817/aws-test-nodejsapp:latest
