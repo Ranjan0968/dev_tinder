@@ -66,7 +66,7 @@ app.patch("/user",async(req,res)=>{
 connectionDB().then(
   ()=>{
       console.log("Database connected Succesfully")
-      app.listen(process.env.PORT,()=>{
+      app.listen(7777,"0.0.0.0",()=>{
         console.log(`Server is running successfully on port ${process.env.PORT}`)
     })
   }
