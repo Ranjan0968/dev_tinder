@@ -67,7 +67,7 @@ connectionDB().then(
   ()=>{
       console.log("Database connected Succesfully")
       app.listen(7777,"0.0.0.0",()=>{
-        console.log(`Server is running successfully on port ${process.env.PORT}`)
+        console.log('Server is running successfully on port 7777')
     })
   }
 ).catch(
